@@ -1,0 +1,9 @@
+/home/eda/cadence/2022-23/RHELx86/XCELIUM_22.03.005/tools.lnx86/inca/bin/64bit/xmsim
+Obtained 7 stack frames.
+/home/eda/cadence/2022-23/RHELx86/XCELIUM_22.03.005/tools.lnx86/inca/bin/64bit/../../../lib/64bit/libcbreakpad.so(_Z13use_backtracev+0x9d) [0x7fef7a4301a3]
+/home/eda/cadence/2022-23/RHELx86/XCELIUM_22.03.005/tools.lnx86/inca/bin/64bit/../../../lib/64bit/libcbreakpad.so(cbpad_generate_dump_on_demand+0x66) [0x7fef7a430630]
+xmsim() [0x18e2546]
+xmsim(serror+0x95) [0x18e40a5]
+xmsim() [0xb45407]
+/lib64/libpthread.so.0(+0x12d10) [0x7fef7adf5d10]
+[0x5ce3046]
