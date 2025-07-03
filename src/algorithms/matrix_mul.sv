@@ -183,7 +183,6 @@ task automatic matrix_mul_thread_safe(
   input logic signed [31:0] input_matrix_b [MATRIX_SIZE][MATRIX_SIZE],
   output logic signed [31:0] output_result [MATRIX_SIZE][MATRIX_SIZE]
 );
-  // Kritik bölüm senkronizasyonu için semaphore
   semaphore sema = new(1);
   
   // Her bir matris hücresi için ayrı bir fork oluşturulur
@@ -199,18 +198,15 @@ task automatic matrix_mul_thread_safe(
             logic signed [31:0] local_matrix_a [MATRIX_SIZE][MATRIX_SIZE];
             logic signed [31:0] local_matrix_b [MATRIX_SIZE][MATRIX_SIZE];
             logic signed [31:0] local_cell_result;
-            
-            // Her thread için tamamen bağımsız matris kopyaları
+
             local_matrix_a = input_matrix_a;
             local_matrix_b = input_matrix_b;
             
-            // Hücre hesaplaması
             local_cell_result = 0;
             for (int k = 0; k < MATRIX_SIZE; k++) begin
               local_cell_result += local_matrix_a[row][k] * local_matrix_b[k][col];
             end
-            
-            // Sonucu senkronize bir şekilde yaz
+
             sema.get();
             output_result[row][col] = local_cell_result;
             sema.put();
@@ -220,7 +216,6 @@ task automatic matrix_mul_thread_safe(
     end
   join
 
-  // Tüm hesaplamaların tamamlanmasını bekle
   wait fork;
 endtask
 
